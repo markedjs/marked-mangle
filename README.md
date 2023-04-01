@@ -4,38 +4,28 @@
 # TODO:
 
 - [ ] Replace information in `/README.md`
-- [ ] Replace name in `/rollup.config.js`
-- [ ] Replace information in `/package.json`
 - [ ] Write extension in `/src/index.js`
 - [ ] Write tests in `/spec/index.test.js`
 - [ ] Uncomment release in `/.github/workflows/main.yml`
 
 <!-- Delete this line and above -->
 
-# marked-|this-extension|
-<!-- Description -->
+# marked-mangle
+
+Autolinked email address is escaped with HTML character references.
 
 # Usage
-<!-- Show most examples of how to use this extension -->
 
 ```js
 import {marked} from "marked";
-import |thisExtension| from "marked-|this-extension|";
+import {markedMangle} from "marked-mangle";
 
 // or UMD script
 // <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
-// <script src="https://cdn.jsdelivr.net/npm/marked-|this-extension|/lib/index.umd.js"></script>
+// <script src="https://cdn.jsdelivr.net/npm/marked-mangle/lib/index.umd.js"></script>
 
-const options = {
-	// |default options|
-};
+marked.use(markedMangle());
 
-marked.use(|thisExtension|(options));
-
-marked.parse("|example markdown|");
-// <p>|example html|</p>
+marked.parse("email@example.com");
+// <p><a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a></p>
 ```
-
-## `options`
-
-<!-- If there are no options you can delete this section -->

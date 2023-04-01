@@ -2,7 +2,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      name: '|thisExtension|',
+      name: 'markedMangle',
       file: 'lib/index.umd.js',
       format: 'umd',
       globals: {

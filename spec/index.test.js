@@ -1,18 +1,19 @@
 import { marked } from 'marked';
 import { mangle } from '../src/index.js';
 
-function mockRandom() {
-  let rand = 0;
-  jest.spyOn(global.Math, 'random').mockImplementation(() => {
-    rand = ((rand + 1.5719987646819482) ** 2) % 1;
-    return rand;
-  });
+function LCG(seed = 1) {
+  function rand() {
+    seed = Math.imul(48271, seed) | 0 % 2147483647;
+    return (seed & 2147483647) / 2147483648;
+  }
+  rand(); // burn first number
+  return rand;
 }
 
 describe('mangle', () => {
   beforeEach(() => {
     marked.setOptions(marked.getDefaults());
-    mockRandom();
+    jest.spyOn(global.Math, 'random').mockImplementation(LCG());
   });
 
   test('leave regular link', () => {
@@ -32,7 +33,7 @@ describe('mangle', () => {
 `;
     marked.use(mangle());
     expect(marked.parse(markdown)).toMatchInlineSnapshot(`
-"<p><a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a></p>
+"<p><a href="mailto:&#101;&#x6d;&#x61;&#x69;&#108;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#101;&#x6d;&#x61;&#x69;&#108;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;</a></p>
 "
 `);
   });
@@ -43,7 +44,7 @@ describe('mangle', () => {
 `;
     marked.use(mangle());
     expect(marked.parse(markdown)).toMatchInlineSnapshot(`
-"<p><a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;"><strong>my</strong> email</a></p>
+"<p><a href="mailto:&#101;&#x6d;&#x61;&#x69;&#108;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;"><strong>my</strong> email</a></p>
 "
 `);
   });
@@ -54,7 +55,7 @@ describe('mangle', () => {
 `;
     marked.use(mangle());
     expect(marked.parse(markdown)).toMatchInlineSnapshot(`
-"<p><a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a></p>
+"<p><a href="mailto:&#101;&#x6d;&#x61;&#x69;&#108;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#101;&#x6d;&#x61;&#x69;&#108;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;</a></p>
 "
 `);
   });
@@ -65,7 +66,7 @@ email@example.com
 `;
     marked.use(mangle());
     expect(marked.parse(markdown)).toMatchInlineSnapshot(`
-"<p><a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a></p>
+"<p><a href="mailto:&#101;&#x6d;&#x61;&#x69;&#108;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#101;&#x6d;&#x61;&#x69;&#108;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;</a></p>
 "
 `);
   });

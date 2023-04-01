@@ -1,5 +1,5 @@
 import { marked } from 'marked';
-import { markedMangle } from '../src/index.js';
+import { mangle } from '../src/index.js';
 
 function mockRandom() {
   let rand = 0;
@@ -9,7 +9,7 @@ function mockRandom() {
   });
 }
 
-describe('markedMangle', () => {
+describe('mangle', () => {
   beforeEach(() => {
     marked.setOptions(marked.getDefaults());
     mockRandom();
@@ -19,7 +19,7 @@ describe('markedMangle', () => {
     const markdown = `
 [other link](https://example.com)
 `;
-    marked.use(markedMangle());
+    marked.use(mangle());
     expect(marked.parse(markdown)).toMatchInlineSnapshot(`
 "<p><a href="https://example.com">other link</a></p>
 "
@@ -30,7 +30,7 @@ describe('markedMangle', () => {
     const markdown = `
 [email@example.com](mailto:email@example.com)
 `;
-    marked.use(markedMangle());
+    marked.use(mangle());
     expect(marked.parse(markdown)).toMatchInlineSnapshot(`
 "<p><a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a></p>
 "
@@ -41,7 +41,7 @@ describe('markedMangle', () => {
     const markdown = `
 [**my** email](mailto:email@example.com)
 `;
-    marked.use(markedMangle());
+    marked.use(mangle());
     expect(marked.parse(markdown)).toMatchInlineSnapshot(`
 "<p><a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;"><strong>my</strong> email</a></p>
 "
@@ -52,7 +52,7 @@ describe('markedMangle', () => {
     const markdown = `
 <email@example.com>
 `;
-    marked.use(markedMangle());
+    marked.use(mangle());
     expect(marked.parse(markdown)).toMatchInlineSnapshot(`
 "<p><a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a></p>
 "
@@ -63,7 +63,7 @@ describe('markedMangle', () => {
     const markdown = `
 email@example.com
 `;
-    marked.use(markedMangle());
+    marked.use(mangle());
     expect(marked.parse(markdown)).toMatchInlineSnapshot(`
 "<p><a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a></p>
 "

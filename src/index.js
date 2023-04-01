@@ -1,4 +1,4 @@
-export function markedMangle() {
+export function mangle() {
   return {
     mangle: false, // remove this once mangle option is removed
     walkTokens(token) {
@@ -11,7 +11,7 @@ export function markedMangle() {
       }
 
       const email = token.href.substring(7);
-      const mangledEmail = mangle(email);
+      const mangledEmail = mangleEmail(email);
 
       token.href = `mailto:${mangledEmail}`;
 
@@ -25,7 +25,7 @@ export function markedMangle() {
   };
 }
 
-function mangle(text) {
+function mangleEmail(text) {
   let out = '',
     i,
     ch;

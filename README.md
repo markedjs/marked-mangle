@@ -1,18 +1,6 @@
-<!-- The character `|` around a string denotes a place in this markdown file that needs to be changed for each extension. -->
-<!-- You may also delete any comments you don't need anymore. -->
-
-# TODO:
-
-- [ ] Replace information in `/README.md`
-- [ ] Write extension in `/src/index.js`
-- [ ] Write tests in `/spec/index.test.js`
-- [ ] Uncomment release in `/.github/workflows/main.yml`
-
-<!-- Delete this line and above -->
-
 # marked-mangle
 
-Autolinked email address is escaped with HTML character references.
+Mangle mailto links with HTML character references.
 
 # Usage
 

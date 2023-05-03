@@ -1,6 +1,6 @@
 {
   "name": "marked-mangle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "marked mangle extension",
   "main": "./lib/index.cjs",
   "module": "./src/index.js",

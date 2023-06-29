@@ -2,6 +2,8 @@
 
 Mangle mailto links with HTML character references.
 
+Mangling mailto links in this way is useful when you want to prevent email harvesting bots from collecting email addresses from your website, in the case that the Markdown is server-rendered. It's also useful for preventing the browser from automatically opening the user's default email client when clicking on a mailto link.
+
 # Usage
 
 ```js

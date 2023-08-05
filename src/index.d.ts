@@ -1,8 +1,9 @@
-import type { marked } from "marked"
+import type { marked } from 'marked';
+import type { MarkedExtension } from 'marked';
 
 /**
  * Mangle email address
  *
- * @returns A {@link marked.MarkedExtension | MarkedExtension} to be passed to {@link marked.use | `marked.use()`}
+ * @returns A {@link MarkedExtension | MarkedExtension} to be passed to {@link marked.use | `marked.use()`}
  */
-export function mangle(): marked.MarkedExtension;
+export function mangle(): MarkedExtension;

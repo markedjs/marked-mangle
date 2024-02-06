@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/markedjs/marked-mangle#readme",
   "peerDependencies": {
-    "marked": ">=4 <12"
+    "marked": ">=4 <13"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",

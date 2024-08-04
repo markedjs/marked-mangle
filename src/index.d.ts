@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 import type { marked } from 'marked';
 import type { MarkedExtension } from 'marked';
 

@@ -26,7 +26,7 @@
     "test": "jest --verbose",
     "test:cover": "jest --coverage",
     "test:types": "tsd -f spec/index.test-d.ts -t src/index.d.ts",
-    "lint": "eslint .",
+    "lint": "eslint",
     "build": "rollup -c rollup.config.js"
   },
   "repository": {
@@ -40,27 +40,25 @@
   },
   "homepage": "https://github.com/markedjs/marked-mangle#readme",
   "peerDependencies": {
-    "marked": ">=4 <14"
+    "marked": ">=4 <13"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.9",
-    "@babel/preset-env": "^7.25.0",
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@markedjs/eslint-config": "^1.0.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^10.1.3",
+    "@semantic-release/github": "^10.0.6",
     "@semantic-release/npm": "^12.0.1",
-    "@semantic-release/release-notes-generator": "^14.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.0",
     "babel-jest": "^29.7.0",
-    "eslint": "^8.57.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-promise": "^6.6.0",
+    "eslint": "^9.8.0",
+    "globals": "^15.9.0",
     "jest-cli": "^29.7.0",
-    "marked": "^13.0.3",
-    "rollup": "^4.19.2",
+    "marked": "^12.0.2",
+    "rollup": "^4.18.0",
     "semantic-release": "^24.0.0",
-    "tsd": "^0.31.1"
+    "tsd": "^0.31.0"
   }
 }

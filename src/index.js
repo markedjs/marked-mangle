@@ -19,6 +19,7 @@ export function mangle() {
         return;
       }
 
+      token.autolink = false;
       token.text = mangledEmail;
       token.tokens[0].text = mangledEmail;
     },
